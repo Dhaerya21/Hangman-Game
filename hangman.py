@@ -30,17 +30,31 @@ hangman_art ={0:("┌──── ",
                  "| /|\\ ",
                  "| / \\ "),}
 
-def hangman_man():
+def hangman_man(guess_count):
+    for line in hangman_art[guess_count]:
+        print(line)
+
+def hangman_answer(answer, guess_count):
+    print(" ".join(answer))
+    print(f"you took a total of {guess_count} guesses")
     pass
 
-def hangman_answer():
-    pass
+def hangman_hint(category,hint,guess_count):
+    print(f"category is {category} ")
+    hangman_man(guess_count)
+    print(" ".join(hint))
 
-def hangman_hint():
-    pass
 
 def main():
-    print(len(hangman_answers["plants"]))
+    category = random.choice(list(hangman_answers.keys()))
+    answer = random.choice(hangman_answers[category])
+    guess_count = 0
+    guessed_words = set()
+    hint = ["_" for _ in range(len(answer))]
+    hangman_hint(category,hint,guess_count)
+    
+    
+    
 
 if __name__ == "__main__":
     main()

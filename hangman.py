@@ -40,9 +40,11 @@ def hangman_answer(answer, guess_count):
     pass
 
 def hangman_hint(category,hint,guess_count):
+    print("*******************************")
     print(f"category is {category} ")
     hangman_man(guess_count)
     print(" ".join(hint))
+    print("\n")
 
 
 def main():
@@ -51,7 +53,18 @@ def main():
     guess_count = 0
     guessed_words = set()
     hint = ["_" for _ in range(len(answer))]
-    hangman_hint(category,hint,guess_count)
+    refrence = True
+    while refrence:
+        hangman_hint(category,hint,guess_count)
+        guess = input("enter your guess: ")
+        if len(guess)>1 or not guess.isalpha :
+            print("enter valid guess")
+            continue
+        if guess in guessed_words:
+            print("already guessed!")
+            continue
+        guessed_words.add(guess)
+
     
     
     

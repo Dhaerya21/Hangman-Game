@@ -35,9 +35,8 @@ def hangman_man(guess_count):
         print(line)
 
 def hangman_answer(answer, guess_count):
-    print(" ".join(answer))
+    print("Answer: " + "".join(answer))
     print(f"you took a total of {guess_count} guesses")
-    pass
 
 def hangman_hint(category,hint,guess_count):
     print("*******************************")
@@ -55,19 +54,32 @@ def main():
     hint = ["_" for _ in range(len(answer))]
     refrence = True
     while refrence:
+        if "_" not in hint:
+            print("You Win!!")
+            hangman_answer(answer,guess_count)
+            break
+        elif guess_count >= len(hangman_art)-1:
+            print("You Lose!!")
+            hangman_answer(answer,guess_count)
+            break
         hangman_hint(category,hint,guess_count)
-        guess = input("enter your guess: ")
-        if len(guess)>1 or not guess.isalpha :
+        guess = input("enter your guess: ").lower()
+        if len(guess)>1 or not guess.isalpha() :
             print("enter valid guess")
             continue
         if guess in guessed_words:
             print("already guessed!")
             continue
         guessed_words.add(guess)
-
-    
-    
-    
+        if guess in answer:
+            for i in range(len(answer)):
+                if guess == answer[i]:
+                    hint[i]= guess
+            print("succesfull guess")
+        else:
+            print("incorrect guess")
+            guess_count+=1
+    print("\nThanks For Playing")
 
 if __name__ == "__main__":
     main()
